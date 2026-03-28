@@ -7,5 +7,17 @@
 </head>
 <body>
     <h1>Teste</h1>
+    <button onclick=receberReceita()>Apertar</button>
 </body>
+<script>
+    async function receberReceita() {
+        const API_KEY = "c18374932e7b404781aa56ec44f1001c"; // Você precisa se cadastrar no site deles
+        const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1`;
+
+        const response = await fetch(BASE_URL);
+        const data = await response.json();
+
+        console.log(data.recipes[0]); // Aqui está a mágica
+    }
+</script>
 </html>
