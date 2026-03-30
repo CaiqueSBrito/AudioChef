@@ -1,4 +1,6 @@
 [] lib text to audio
 [] chatbot 
 
-[] adicionar a view diets, dishtypes, extendedingredients, image, imagetype, instructions, summary, vegan, vegetarian
+[x] adicionar a view diets, dishtypes, extendedingredients, image, imagetype, instructions, summary, vegan, vegetarian
+
+o chatbot deve entender o que o cliente quer, algo proteico ou doce e deve redirecionar para uma receita que deseja

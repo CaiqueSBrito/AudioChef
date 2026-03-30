@@ -1,23 +1,426 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AudioChef — Descubra Receitas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #e8e8e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ── */
+        .header {
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e94560, #ff6b6b, #ffa502);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            margin-top: 0.5rem;
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* ── Main ── */
+        .main {
+            width: 100%;
+            max-width: 820px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* ── Button ── */
+        .btn-recipe {
+            padding: 0.9rem 2.4rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #e94560, #c23152);
+            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-recipe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(233, 69, 96, 0.5);
+        }
+
+        .btn-recipe:active {
+            transform: translateY(0);
+        }
+
+        .btn-recipe:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        /* ── Spinner ── */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #e94560;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Recipe Card ── */
+        .recipe-card {
+            display: none;
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            animation: fadeUp 0.5s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+        }
+
+        .recipe-body {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .recipe-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ── Tags ── */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag--vegan {
+            background: rgba(46, 213, 115, 0.15);
+            color: #2ed573;
+        }
+
+        .tag--vegetarian {
+            background: rgba(255, 165, 2, 0.15);
+            color: #ffa502;
+        }
+
+        .tag--diet {
+            background: rgba(116, 185, 255, 0.15);
+            color: #74b9ff;
+        }
+
+        .tag--dish {
+            background: rgba(162, 155, 254, 0.15);
+            color: #a29bfe;
+        }
+
+        /* ── Meta row ── */
+        .meta-row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .meta-item strong {
+            color: #e8e8e8;
+        }
+
+        /* ── Ingredients ── */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e94560;
+            margin-bottom: 0.3rem;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .ingredient {
+            padding: 0.55rem 0.8rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: #ccc;
+            border-left: 3px solid #e94560;
+        }
+
+        /* ── Instructions ── */
+        .instructions {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: #bbb;
+        }
+
+        .instructions ol {
+            padding-left: 1.2rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Summary ── */
+        .summary {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: #999;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .summary a {
+            color: #e94560;
+        }
+
+        /* ── Error ── */
+        .error-msg {
+            display: none;
+            padding: 1rem 1.5rem;
+            background: rgba(233, 69, 96, 0.12);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            color: #ff6b6b;
+            font-size: 0.95rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.7rem; }
+            .recipe-card img { height: 220px; }
+            .recipe-body { padding: 1.2rem; }
+            .ingredients-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Teste</h1>
-    <button onclick=receberReceita()>Apertar</button>
-</body>
+
+    <header class="header">
+        <h1>🍳 AudioChef</h1>
+        <p>Descubra receitas aleatórias com um clique</p>
+    </header>
+
+    <main class="main">
+        <button class="btn-recipe" id="btn-recipe" onclick="receberReceita()">
+            🔀 Gerar Receita Aleatória
+        </button>
+
+        <div class="spinner" id="spinner"></div>
+        <div class="error-msg" id="error-msg"></div>
+
+        <article class="recipe-card" id="recipe-card">
+            <img id="recipe-img" src="" alt="Foto da receita">
+            <div class="recipe-body">
+                <h2 id="recipe-title"></h2>
+                <div class="tags" id="recipe-tags"></div>
+
+                <div class="meta-row" id="recipe-meta"></div>
+
+                <div>
+                    <h3 class="section-title">🧂 Ingredientes</h3>
+                    <div class="ingredients-grid" id="recipe-ingredients"></div>
+                </div>
+
+                <div>
+                    <h3 class="section-title">📝 Instruções</h3>
+                    <div class="instructions" id="recipe-instructions"></div>
+                </div>
+
+                <div>
+                    <h3 class="section-title">ℹ️ Resumo</h3>
+                    <div class="summary" id="recipe-summary"></div>
+                </div>
+            </div>
+        </article>
+    </main>
+
 <script>
     async function receberReceita() {
-        const API_KEY = "c18374932e7b404781aa56ec44f1001c"; // Você precisa se cadastrar no site deles
-        const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1`;
+        const btn      = document.getElementById('btn-recipe');
+        const spinner  = document.getElementById('spinner');
+        const card     = document.getElementById('recipe-card');
+        const errorMsg = document.getElementById('error-msg');
 
-        const response = await fetch(BASE_URL);
-        const data = await response.json();
+        // UI: loading state
+        btn.disabled = true;
+        btn.textContent = '⏳ Buscando…';
+        spinner.style.display = 'block';
+        card.style.display = 'none';
+        errorMsg.style.display = 'none';
 
-        console.log(data.recipes[0]); // Aqui está a mágica
+        try {
+            const response = await fetch('api/recipes/');
+            if (!response.ok) throw new Error(`Erro ${response.status}`);
+            const data = await response.json();
+
+            renderRecipe(data);
+        } catch (err) {
+            errorMsg.textContent = '⚠️ Não foi possível carregar a receita. Tente novamente.';
+            errorMsg.style.display = 'block';
+            console.error(err);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '🔀 Gerar Receita Aleatória';
+            spinner.style.display = 'none';
+        }
+    }
+
+    function renderRecipe(r) {
+        const card = document.getElementById('recipe-card');
+
+        // Image — use placeholder if missing
+        const img = document.getElementById('recipe-img');
+        img.src = r.image || 'https://via.placeholder.com/800x400?text=Sem+Imagem';
+
+        // Title — extract from summary or fallback
+        const titleEl = document.getElementById('recipe-title');
+        // The API may not return a title field directly; use first line of summary or a default
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = r.summary || '';
+        const firstBold = tempDiv.querySelector('b');
+        titleEl.textContent = firstBold ? firstBold.textContent : 'Receita';
+
+        // Tags
+        const tagsEl = document.getElementById('recipe-tags');
+        tagsEl.innerHTML = '';
+
+        if (r.vegan)      tagsEl.innerHTML += '<span class="tag tag--vegan">Vegano</span>';
+        if (r.vegetarian)  tagsEl.innerHTML += '<span class="tag tag--vegetarian">Vegetariano</span>';
+
+        if (r.diets && r.diets.length) {
+            r.diets.forEach(d => {
+                tagsEl.innerHTML += `<span class="tag tag--diet">${d}</span>`;
+            });
+        }
+        if (r.dishTypes && r.dishTypes.length) {
+            r.dishTypes.forEach(d => {
+                tagsEl.innerHTML += `<span class="tag tag--dish">${d}</span>`;
+            });
+        }
+
+        // Meta (servings, time)
+        const metaEl = document.getElementById('recipe-meta');
+        metaEl.innerHTML = '';
+        if (r.servings) {
+            metaEl.innerHTML += `<div class="meta-item">🍽️ <strong>${r.servings}</strong> porções</div>`;
+        }
+        if (r.readyInMinutes) {
+            metaEl.innerHTML += `<div class="meta-item">⏱️ <strong>${r.readyInMinutes}</strong> minutos</div>`;
+        }
+
+        // Ingredients
+        const ingredientsEl = document.getElementById('recipe-ingredients');
+        ingredientsEl.innerHTML = '';
+        if (r.extendedIngredients && r.extendedIngredients.length) {
+            r.extendedIngredients.forEach(ing => {
+                ingredientsEl.innerHTML += `<div class="ingredient">${ing.original || ing.name}</div>`;
+            });
+        } else {
+            ingredientsEl.innerHTML = '<p style="color:#666">Sem ingredientes disponíveis.</p>';
+        }
+
+        // Instructions
+        const instructionsEl = document.getElementById('recipe-instructions');
+        if (r.instructions) {
+            // The API may return HTML or plain text
+            if (r.instructions.includes('<ol>') || r.instructions.includes('<li>')) {
+                instructionsEl.innerHTML = r.instructions;
+            } else {
+                // Split by sentences / line breaks
+                const steps = r.instructions
+                    .split(/(?:\.\s|\n)/)
+                    .map(s => s.trim())
+                    .filter(s => s.length > 2);
+                instructionsEl.innerHTML = '<ol>' + steps.map(s => `<li>${s}.</li>`).join('') + '</ol>';
+            }
+        } else {
+            instructionsEl.innerHTML = '<p style="color:#666">Sem instruções disponíveis.</p>';
+        }
+
+        // Summary
+        const summaryEl = document.getElementById('recipe-summary');
+        summaryEl.innerHTML = r.summary || '<p style="color:#666">Sem resumo disponível.</p>';
+
+        // Show card with animation
+        card.style.display = 'block';
+        card.style.animation = 'none';
+        card.offsetHeight; // trigger reflow
+        card.style.animation = 'fadeUp 0.5s ease';
     }
 </script>
+</body>
 </html>
