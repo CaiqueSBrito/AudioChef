@@ -27,10 +27,17 @@
         /* ── Header ── */
         .header {
             width: 100%;
-            padding: 2rem;
-            text-align: center;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
         }
 
         .header h1 {
@@ -44,9 +51,52 @@
         }
 
         .header p {
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             color: #888;
-            font-size: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* ── Nav buttons ── */
+        .header-nav {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .btn-nav {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-nav--outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #e8e8e8;
+        }
+
+        .btn-nav--outline:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .btn-nav--primary {
+            background: linear-gradient(135deg, #e94560, #c23152);
+            border: none;
+            color: #fff;
+            box-shadow: 0 3px 14px rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-nav--primary:hover {
+            box-shadow: 0 5px 22px rgba(233, 69, 96, 0.5);
         }
 
         /* ── Main ── */
@@ -270,8 +320,14 @@
 <body>
 
     <header class="header">
-        <h1>🍳 AudioChef</h1>
-        <p>Descubra receitas aleatórias com um clique</p>
+        <div class="header-left">
+            <h1>🍳 AudioChef</h1>
+            <p>Descubra receitas aleatórias com um clique</p>
+        </div>
+        <nav class="header-nav">
+            <a href="{% url 'login' %}" class="btn-nav btn-nav--outline">Entrar</a>
+            <a href="{% url 'registro' %}" class="btn-nav btn-nav--primary">Criar Conta</a>
+        </nav>
     </header>
 
     <main class="main">

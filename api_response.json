@@ -1,0 +1,976 @@
+{
+  "recipes": [
+    {
+      "id": 660868,
+      "image": "https://img.spoonacular.com/recipes/660868-556x370.jpg",
+      "imageType": "jpg",
+      "title": "Spanish Meatballs In Tomato Sauce",
+      "readyInMinutes": 45,
+      "servings": 20,
+      "sourceUrl": "https://www.foodista.com/recipe/B5G2KB4R/spanish-meatballs-in-tomato-sauce",
+      "vegetarian": false,
+      "vegan": false,
+      "glutenFree": false,
+      "dairyFree": true,
+      "veryHealthy": false,
+      "cheap": false,
+      "veryPopular": false,
+      "sustainable": false,
+      "lowFodmap": false,
+      "weightWatcherSmartPoints": 4,
+      "gaps": "no",
+      "preparationMinutes": null,
+      "cookingMinutes": null,
+      "aggregateLikes": 11,
+      "healthScore": 1.0,
+      "creditsText": "Foodista.com – The Cooking Encyclopedia Everyone Can Edit",
+      "license": "CC BY 3.0",
+      "sourceName": "Foodista",
+      "pricePerServing": 59.54,
+      "extendedIngredients": [
+        {
+          "id": 2004,
+          "aisle": "Spices and Seasonings",
+          "image": "bay-leaves.jpg",
+          "consistency": "SOLID",
+          "name": "bay leaf",
+          "nameClean": "bay leaf",
+          "original": "1 bay leaf",
+          "originalName": "bay leaf",
+          "amount": 1.0,
+          "unit": "",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "",
+              "unitLong": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unitShort": "",
+              "unitLong": ""
+            }
+          }
+        },
+        {
+          "id": 11215,
+          "aisle": "Produce",
+          "image": "garlic.png",
+          "consistency": "SOLID",
+          "name": "garlic",
+          "nameClean": "garlic",
+          "original": "2 cloves of garlic, finely chopped",
+          "originalName": "garlic, finely chopped",
+          "amount": 2.0,
+          "unit": "cloves",
+          "meta": [
+            "finely chopped"
+          ],
+          "measures": {
+            "us": {
+              "amount": 2.0,
+              "unitShort": "cloves",
+              "unitLong": "cloves"
+            },
+            "metric": {
+              "amount": 2.0,
+              "unitShort": "cloves",
+              "unitLong": "cloves"
+            }
+          }
+        },
+        {
+          "id": 10023572,
+          "aisle": "Meat",
+          "image": "fresh-ground-beef.jpg",
+          "consistency": "SOLID",
+          "name": "ground beef",
+          "nameClean": "ground beef",
+          "original": "1 pound Ground beef",
+          "originalName": "Ground beef",
+          "amount": 1.0,
+          "unit": "pound",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "lb",
+              "unitLong": "pound"
+            },
+            "metric": {
+              "amount": 453.592,
+              "unitShort": "g",
+              "unitLong": "grams"
+            }
+          }
+        },
+        {
+          "id": 4053,
+          "aisle": "Oil, Vinegar, Salad Dressing",
+          "image": "olive-oil.jpg",
+          "consistency": "LIQUID",
+          "name": "olive oil",
+          "nameClean": "olive oil",
+          "original": "1 cup olive oil",
+          "originalName": "olive oil",
+          "amount": 1.0,
+          "unit": "cup",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "cup",
+              "unitLong": "cup"
+            },
+            "metric": {
+              "amount": 216.0,
+              "unitShort": "ml",
+              "unitLong": "milliliters"
+            }
+          }
+        },
+        {
+          "id": 4053,
+          "aisle": "Oil, Vinegar, Salad Dressing",
+          "image": "olive-oil.jpg",
+          "consistency": "LIQUID",
+          "name": "olive oil",
+          "nameClean": "olive oil",
+          "original": "2 tablespoons of olive oil",
+          "originalName": "olive oil",
+          "amount": 2.0,
+          "unit": "tablespoons",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 2.0,
+              "unitShort": "Tbsps",
+              "unitLong": "Tbsps"
+            },
+            "metric": {
+              "amount": 2.0,
+              "unitShort": "Tbsps",
+              "unitLong": "Tbsps"
+            }
+          }
+        },
+        {
+          "id": 11282,
+          "aisle": "Produce",
+          "image": "brown-onion.png",
+          "consistency": "SOLID",
+          "name": "onion",
+          "nameClean": "onion",
+          "original": "1/2 cup onion, chopped",
+          "originalName": "onion, chopped",
+          "amount": 0.5,
+          "unit": "cup",
+          "meta": [
+            "chopped"
+          ],
+          "measures": {
+            "us": {
+              "amount": 0.5,
+              "unitShort": "cups",
+              "unitLong": "cups"
+            },
+            "metric": {
+              "amount": 80.0,
+              "unitShort": "g",
+              "unitLong": "grams"
+            }
+          }
+        },
+        {
+          "id": 11282,
+          "aisle": "Produce",
+          "image": "brown-onion.png",
+          "consistency": "SOLID",
+          "name": "half an onion",
+          "nameClean": "half an onion",
+          "original": "Half an onion, finely chopped",
+          "originalName": "Half an onion, finely chopped",
+          "amount": 20.0,
+          "unit": "servings",
+          "meta": [
+            "finely chopped"
+          ],
+          "measures": {
+            "us": {
+              "amount": 20.0,
+              "unitShort": "servings",
+              "unitLong": "servings"
+            },
+            "metric": {
+              "amount": 20.0,
+              "unitShort": "servings",
+              "unitLong": "servings"
+            }
+          }
+        },
+        {
+          "id": 11297,
+          "aisle": "Produce",
+          "image": "parsley.jpg",
+          "consistency": "SOLID",
+          "name": "parsley",
+          "nameClean": "parsley",
+          "original": "2 tablespoons of chopped parsley",
+          "originalName": "chopped parsley",
+          "amount": 2.0,
+          "unit": "tablespoons",
+          "meta": [
+            "chopped"
+          ],
+          "measures": {
+            "us": {
+              "amount": 2.0,
+              "unitShort": "Tbsps",
+              "unitLong": "Tbsps"
+            },
+            "metric": {
+              "amount": 2.0,
+              "unitShort": "Tbsps",
+              "unitLong": "Tbsps"
+            }
+          }
+        },
+        {
+          "id": 1042009,
+          "aisle": "Ethnic Foods",
+          "image": "chili-powder.jpg",
+          "consistency": "SOLID",
+          "name": "pimenton de la vera",
+          "nameClean": "pimenton de la vera",
+          "original": "pinch of Pimenton de la Vera (Dulce) or Spanish sweet paprika",
+          "originalName": "pinch of Pimenton de la Vera (Dulce) or Spanish sweet paprika",
+          "amount": 1.0,
+          "unit": "pinch",
+          "meta": [
+            "sweet",
+            "spanish",
+            "(Dulce)"
+          ],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "pinch",
+              "unitLong": "pinch"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unitShort": "pinch",
+              "unitLong": "pinch"
+            }
+          }
+        },
+        {
+          "id": 1102047,
+          "aisle": "Spices and Seasonings",
+          "image": "salt-and-pepper.jpg",
+          "consistency": "SOLID",
+          "name": "salt and pepper",
+          "nameClean": "salt and pepper",
+          "original": "Salt and pepper to taste",
+          "originalName": "Salt and pepper to taste",
+          "amount": 20.0,
+          "unit": "servings",
+          "meta": [
+            "to taste"
+          ],
+          "measures": {
+            "us": {
+              "amount": 20.0,
+              "unitShort": "servings",
+              "unitLong": "servings"
+            },
+            "metric": {
+              "amount": 20.0,
+              "unitShort": "servings",
+              "unitLong": "servings"
+            }
+          }
+        },
+        {
+          "id": 19335,
+          "aisle": "Baking",
+          "image": "sugar-in-bowl.png",
+          "consistency": "SOLID",
+          "name": "sugar",
+          "nameClean": "sugar",
+          "original": "1 teaspoon of sugar",
+          "originalName": "sugar",
+          "amount": 1.0,
+          "unit": "teaspoon",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            }
+          }
+        },
+        {
+          "id": 11529,
+          "aisle": "Produce",
+          "image": "tomato.png",
+          "consistency": "SOLID",
+          "name": "tomatoes",
+          "nameClean": "tomatoes",
+          "original": "600g tomatoes",
+          "originalName": "tomatoes",
+          "amount": 600.0,
+          "unit": "g",
+          "meta": [],
+          "measures": {
+            "us": {
+              "amount": 1.323,
+              "unitShort": "lb",
+              "unitLong": "pounds"
+            },
+            "metric": {
+              "amount": 600.0,
+              "unitShort": "g",
+              "unitLong": "grams"
+            }
+          }
+        },
+        {
+          "id": 18069,
+          "aisle": "Bakery/Bread",
+          "image": "white-bread.jpg",
+          "consistency": "SOLID",
+          "name": "sandwich bread",
+          "nameClean": "sandwich bread",
+          "original": "4 slices of sandwich bread, only the white part, diced",
+          "originalName": "sandwich bread, only the white part, diced",
+          "amount": 4.0,
+          "unit": "slices",
+          "meta": [
+            "diced",
+            "white"
+          ],
+          "measures": {
+            "us": {
+              "amount": 4.0,
+              "unitShort": "slice",
+              "unitLong": "slices"
+            },
+            "metric": {
+              "amount": 4.0,
+              "unitShort": "slice",
+              "unitLong": "slices"
+            }
+          }
+        },
+        {
+          "id": 1123,
+          "aisle": "Milk, Eggs, Other Dairy",
+          "image": "egg.png",
+          "consistency": "SOLID",
+          "name": "egg",
+          "nameClean": "egg",
+          "original": "1 large egg, whole",
+          "originalName": "egg, whole",
+          "amount": 1.0,
+          "unit": "large",
+          "meta": [
+            "whole"
+          ],
+          "measures": {
+            "us": {
+              "amount": 1.0,
+              "unitShort": "large",
+              "unitLong": "large"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unitShort": "large",
+              "unitLong": "large"
+            }
+          }
+        }
+      ],
+      "summary": "You can never have too many European recipes, so give Spanish Meatballs In Tomato Sauce a try. This recipe serves 20. One serving contains <b>137 calories</b>, <b>6g of protein</b>, and <b>9g of fat</b>. For <b>60 cents per serving</b>, this recipe <b>covers 6%</b> of your daily requirements of vitamins and minerals. 11 person have made this recipe and would make it again. From preparation to the plate, this recipe takes around <b>45 minutes</b>. This recipe from Foodista requires parsley, sandwich bread, salt and pepper, and egg. It works well as a hor d'oeuvre. It is a good option if you're following a <b>dairy free</b> diet. All things considered, we decided this recipe <b>deserves a spoonacular score of 28%</b>. This score is not so tremendous. Try <a href=\"https://spoonacular.com/recipes/spanish-meatballs-in-tomato-sauce-1399727\">Spanish Meatballs In Tomato Sauce</a>, <a href=\"https://spoonacular.com/recipes/spanish-style-lamb-meatballs-with-spicy-tomato-sauce-620788\">Spanish Style Lamb Meatballs with Spicy Tomato Sauce</a>, and <a href=\"https://spoonacular.com/recipes/spanish-meatballs-with-almond-sauce-553384\">Spanish Meatballs with Almond Sauce</a> for similar recipes.",
+      "cuisines": [
+        "Spanish",
+        "European"
+      ],
+      "dishTypes": [
+        "antipasti",
+        "starter",
+        "snack",
+        "appetizer",
+        "antipasto",
+        "hor d'oeuvre"
+      ],
+      "diets": [
+        "dairy free"
+      ],
+      "occasions": [],
+      "instructions": "<ol><li>Start by making the tomato sauce.</li><li>Finely chop 1 onion.</li><li>Peel 600g of tomatoes with a serrated peeler. Chop the peeled tomatoes into small pieces.</li><li>Add 2 tablespoons of olive oil in a sauce pan. Add the chopped onions.</li><li>Add a pinch of Pimenton de la Vera (Dulce), which is Spanish smoked sweet paprika. I used 1/4 teaspoon. Add more if you prefer the sauce to be spicy.</li><li>Add the chopped tomatoes to the onions mixture and stir well to combine.</li><li>Add 1 fresh bay leaf. I used 2 dried pieces here because I couldnt find fresh ones.</li><li>Add 1 teaspoon of sugar andd salt and pepper to taste. I added 1/2 teaspoon of salt and 1/4 teaspoon of ground black pepper. Adjust seasoning to taste.</li><li>Cover the sauce pan and reduce the heat to a medium-low and let the tomato mixture simmer gently till it reduces to a sauce like consistency.</li><li></li><li>In the meantime, make the meatballs by adding 1/2 an onion to a food processor.</li><li>Add 2 cloves of garlic. I used 1 tablespoon of minced garlic. Process till the onions and garlic are finely chopped.</li><li>Sweat the onion-garlic mixture in a frying pan with some olive oil. I just realised that I had missed this step. The meatballs still tasted great.</li><li>Add the onion-garlic mixture to 500g ground beef in a mixing bowl.</li><li>Slice off the crust of 4 slices of white bread. Cut the soft white bread into small cubes of 1cm all round.</li><li>Add the chopped bread to the beef mixture.</li><li>Add 2 tablespoons of chopped parsley. Use Italian flat parsley where possible. I couldnt find any, so I used English parsley.</li><li>Add 1 large egg.</li><li>Add salt and pepper to taste. I used approximately 1/4 teaspoon of salt and a pinch of black pepper.</li><li>Mix well to combine.</li><li>Shape the meat mixture into balls that are slightly bigger than the size of a golf ball size. Roll the meat tightly to form meatballs.</li><li>Add 3/4 cup of olive oil to frying pan. The layer of oil should be approximately 3/4cm in the pan.</li><li>Put the pan on medium-high heat and add the meatballs to the oil. Gently roll them around in the oil to brown all surfaces and ensure even cooking.</li><li>When the meatballs are a deep golden brown, remove them from the frying pan and set aside.</li><li>The tomatoes-onion mixture should have reduced to a sauce consistency now. You can use a hand blender to puree the mixture. Or leave the small bits of tomatoes and onions as they are.</li><li>Add the meatballs to the tomato sauce and let the meatballs warm through.</li><li>Garnish with more chopped parsley.</li></ol>",
+      "analyzedInstructions": [
+        {
+          "name": "",
+          "steps": [
+            {
+              "number": 1,
+              "step": "Start by making the tomato sauce.Finely chop 1 onion.Peel 600g of tomatoes with a serrated peeler. Chop the peeled tomatoes into small pieces.",
+              "ingredients": [
+                {
+                  "id": 10011531,
+                  "name": "canned whole tomatoes",
+                  "localizedName": "canned whole tomatoes",
+                  "image": "tomatoes-canned.png"
+                },
+                {
+                  "id": 11549,
+                  "name": "tomato sauce",
+                  "localizedName": "tomato sauce",
+                  "image": "tomato-sauce-or-pasta-sauce.jpg"
+                },
+                {
+                  "id": 11529,
+                  "name": "tomato",
+                  "localizedName": "tomato",
+                  "image": "tomato.png"
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404693,
+                  "name": "peeler",
+                  "localizedName": "peeler",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/peeler.png"
+                }
+              ]
+            },
+            {
+              "number": 2,
+              "step": "Add 2 tablespoons of olive oil in a sauce pan.",
+              "ingredients": [
+                {
+                  "id": 4053,
+                  "name": "olive oil",
+                  "localizedName": "olive oil",
+                  "image": "olive-oil.jpg"
+                },
+                {
+                  "id": 0,
+                  "name": "sauce",
+                  "localizedName": "sauce",
+                  "image": ""
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404669,
+                  "name": "sauce pan",
+                  "localizedName": "sauce pan",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/sauce-pan.jpg"
+                }
+              ]
+            },
+            {
+              "number": 3,
+              "step": "Add the chopped onions.",
+              "ingredients": [
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 4,
+              "step": "Add a pinch of Pimenton de la Vera (Dulce), which is Spanish smoked sweet paprika. I used 1/4 teaspoon.",
+              "ingredients": [
+                {
+                  "id": 1042009,
+                  "name": "pimenton de la vera",
+                  "localizedName": "pimenton de la vera",
+                  "image": "chili-powder.jpg"
+                },
+                {
+                  "id": 1002028,
+                  "name": "sweet paprika",
+                  "localizedName": "sweet paprika",
+                  "image": "paprika.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 5,
+              "step": "Add more if you prefer the sauce to be spicy.",
+              "ingredients": [
+                {
+                  "id": 0,
+                  "name": "sauce",
+                  "localizedName": "sauce",
+                  "image": ""
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 6,
+              "step": "Add the chopped tomatoes to the onions mixture and stir well to combine.",
+              "ingredients": [
+                {
+                  "id": 11529,
+                  "name": "tomato",
+                  "localizedName": "tomato",
+                  "image": "tomato.png"
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 7,
+              "step": "Add 1 fresh bay leaf. I used 2 dried pieces here because I couldnt find fresh ones.",
+              "ingredients": [
+                {
+                  "id": 1002004,
+                  "name": "fresh bay leaves",
+                  "localizedName": "fresh bay leaves",
+                  "image": "bay-leaves.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 8,
+              "step": "Add 1 teaspoon of sugar andd salt and pepper to taste. I added 1/2 teaspoon of salt and 1/4 teaspoon of ground black pepper. Adjust seasoning to taste.Cover the sauce pan and reduce the heat to a medium-low and let the tomato mixture simmer gently till it reduces to a sauce like consistency.In the meantime, make the meatballs by adding 1/2 an onion to a food processor.",
+              "ingredients": [
+                {
+                  "id": 1002030,
+                  "name": "ground black pepper",
+                  "localizedName": "ground black pepper",
+                  "image": "pepper.jpg"
+                },
+                {
+                  "id": 1102047,
+                  "name": "salt and pepper",
+                  "localizedName": "salt and pepper",
+                  "image": "salt-and-pepper.jpg"
+                },
+                {
+                  "id": 10110219,
+                  "name": "meatballs",
+                  "localizedName": "meatballs",
+                  "image": "https://spoonacular.com/cdn/ingredients_100x100/meatballs.png"
+                },
+                {
+                  "id": 1042027,
+                  "name": "seasoning",
+                  "localizedName": "seasoning",
+                  "image": "seasoning.png"
+                },
+                {
+                  "id": 11529,
+                  "name": "tomato",
+                  "localizedName": "tomato",
+                  "image": "tomato.png"
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                },
+                {
+                  "id": 0,
+                  "name": "sauce",
+                  "localizedName": "sauce",
+                  "image": ""
+                },
+                {
+                  "id": 19335,
+                  "name": "sugar",
+                  "localizedName": "sugar",
+                  "image": "sugar-in-bowl.png"
+                },
+                {
+                  "id": 2047,
+                  "name": "salt",
+                  "localizedName": "salt",
+                  "image": "salt.jpg"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404771,
+                  "name": "food processor",
+                  "localizedName": "food processor",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/food-processor.png"
+                },
+                {
+                  "id": 404669,
+                  "name": "sauce pan",
+                  "localizedName": "sauce pan",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/sauce-pan.jpg"
+                }
+              ]
+            },
+            {
+              "number": 9,
+              "step": "Add 2 cloves of garlic. I used 1 tablespoon of minced garlic. Process till the onions and garlic are finely chopped.Sweat the onion-garlic mixture in a frying pan with some olive oil. I just realised that I had missed this step. The meatballs still tasted great.",
+              "ingredients": [
+                {
+                  "id": 0,
+                  "name": "minced garlic",
+                  "localizedName": "minced garlic",
+                  "image": "garlic.png"
+                },
+                {
+                  "id": 10110219,
+                  "name": "meatballs",
+                  "localizedName": "meatballs",
+                  "image": "https://spoonacular.com/cdn/ingredients_100x100/meatballs.png"
+                },
+                {
+                  "id": 4053,
+                  "name": "olive oil",
+                  "localizedName": "olive oil",
+                  "image": "olive-oil.jpg"
+                },
+                {
+                  "id": 1002011,
+                  "name": "clove",
+                  "localizedName": "clove",
+                  "image": "cloves.jpg"
+                },
+                {
+                  "id": 11215,
+                  "name": "garlic",
+                  "localizedName": "garlic",
+                  "image": "garlic.png"
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404645,
+                  "name": "frying pan",
+                  "localizedName": "frying pan",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/pan.png"
+                }
+              ]
+            },
+            {
+              "number": 10,
+              "step": "Add the onion-garlic mixture to 500g ground beef in a mixing bowl.Slice off the crust of 4 slices of white bread.",
+              "ingredients": [
+                {
+                  "id": 10023572,
+                  "name": "ground beef",
+                  "localizedName": "ground beef",
+                  "image": "fresh-ground-beef.jpg"
+                },
+                {
+                  "id": 18069,
+                  "name": "white bread",
+                  "localizedName": "white bread",
+                  "image": "white-bread.jpg"
+                },
+                {
+                  "id": 11215,
+                  "name": "garlic",
+                  "localizedName": "garlic",
+                  "image": "garlic.png"
+                },
+                {
+                  "id": 0,
+                  "name": "crust",
+                  "localizedName": "crust",
+                  "image": ""
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 405907,
+                  "name": "mixing bowl",
+                  "localizedName": "mixing bowl",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/mixing-bowl.jpg"
+                }
+              ]
+            },
+            {
+              "number": 11,
+              "step": "Cut the soft white bread into small cubes of 1cm all round.",
+              "ingredients": [
+                {
+                  "id": 18069,
+                  "name": "white bread",
+                  "localizedName": "white bread",
+                  "image": "white-bread.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 12,
+              "step": "Add the chopped bread to the beef mixture.",
+              "ingredients": [
+                {
+                  "id": 18064,
+                  "name": "bread",
+                  "localizedName": "bread",
+                  "image": "white-bread.jpg"
+                },
+                {
+                  "id": 23572,
+                  "name": "beef",
+                  "localizedName": "beef",
+                  "image": "beef-cubes-raw.png"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 13,
+              "step": "Add 2 tablespoons of chopped parsley. Use Italian flat parsley where possible. I couldnt find any, so I used English parsley.",
+              "ingredients": [
+                {
+                  "id": 11297,
+                  "name": "parsley",
+                  "localizedName": "parsley",
+                  "image": "parsley.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 14,
+              "step": "Add 1 large egg.",
+              "ingredients": [
+                {
+                  "id": 1123,
+                  "name": "egg",
+                  "localizedName": "egg",
+                  "image": "egg.png"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 15,
+              "step": "Add salt and pepper to taste. I used approximately 1/4 teaspoon of salt and a pinch of black pepper.",
+              "ingredients": [
+                {
+                  "id": 1102047,
+                  "name": "salt and pepper",
+                  "localizedName": "salt and pepper",
+                  "image": "salt-and-pepper.jpg"
+                },
+                {
+                  "id": 1002030,
+                  "name": "black pepper",
+                  "localizedName": "black pepper",
+                  "image": "pepper.jpg"
+                },
+                {
+                  "id": 2047,
+                  "name": "salt",
+                  "localizedName": "salt",
+                  "image": "salt.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 16,
+              "step": "Mix well to combine.Shape the meat mixture into balls that are slightly bigger than the size of a golf ball size.",
+              "ingredients": [
+                {
+                  "id": 1065062,
+                  "name": "meat",
+                  "localizedName": "meat",
+                  "image": "whole-chicken.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 17,
+              "step": "Roll the meat tightly to form meatballs.",
+              "ingredients": [
+                {
+                  "id": 10110219,
+                  "name": "meatballs",
+                  "localizedName": "meatballs",
+                  "image": "https://spoonacular.com/cdn/ingredients_100x100/meatballs.png"
+                },
+                {
+                  "id": 1065062,
+                  "name": "meat",
+                  "localizedName": "meat",
+                  "image": "whole-chicken.jpg"
+                },
+                {
+                  "id": 0,
+                  "name": "roll",
+                  "localizedName": "roll",
+                  "image": "dinner-yeast-rolls.jpg"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 18,
+              "step": "Add 3/4 cup of olive oil to frying pan. The layer of oil should be approximately 3/4cm in the pan.",
+              "ingredients": [
+                {
+                  "id": 4053,
+                  "name": "olive oil",
+                  "localizedName": "olive oil",
+                  "image": "olive-oil.jpg"
+                },
+                {
+                  "id": 4582,
+                  "name": "cooking oil",
+                  "localizedName": "cooking oil",
+                  "image": "vegetable-oil.jpg"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404645,
+                  "name": "frying pan",
+                  "localizedName": "frying pan",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/pan.png"
+                }
+              ]
+            },
+            {
+              "number": 19,
+              "step": "Put the pan on medium-high heat and add the meatballs to the oil. Gently roll them around in the oil to brown all surfaces and ensure even cooking.When the meatballs are a deep golden brown, remove them from the frying pan and set aside.The tomatoes-onion mixture should have reduced to a sauce consistency now. You can use a hand blender to puree the mixture. Or leave the small bits of tomatoes and onions as they are.",
+              "ingredients": [
+                {
+                  "id": 10110219,
+                  "name": "meatballs",
+                  "localizedName": "meatballs",
+                  "image": "https://spoonacular.com/cdn/ingredients_100x100/meatballs.png"
+                },
+                {
+                  "id": 11529,
+                  "name": "tomato",
+                  "localizedName": "tomato",
+                  "image": "tomato.png"
+                },
+                {
+                  "id": 11282,
+                  "name": "onion",
+                  "localizedName": "onion",
+                  "image": "brown-onion.png"
+                },
+                {
+                  "id": 0,
+                  "name": "sauce",
+                  "localizedName": "sauce",
+                  "image": ""
+                },
+                {
+                  "id": 0,
+                  "name": "roll",
+                  "localizedName": "roll",
+                  "image": "dinner-yeast-rolls.jpg"
+                },
+                {
+                  "id": 4582,
+                  "name": "cooking oil",
+                  "localizedName": "cooking oil",
+                  "image": "vegetable-oil.jpg"
+                }
+              ],
+              "equipment": [
+                {
+                  "id": 404776,
+                  "name": "immersion blender",
+                  "localizedName": "immersion blender",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/immersion-blender.png"
+                },
+                {
+                  "id": 404645,
+                  "name": "frying pan",
+                  "localizedName": "frying pan",
+                  "image": "https://spoonacular.com/cdn/equipment_100x100/pan.png"
+                }
+              ]
+            },
+            {
+              "number": 20,
+              "step": "Add the meatballs to the tomato sauce and let the meatballs warm through.",
+              "ingredients": [
+                {
+                  "id": 11549,
+                  "name": "tomato sauce",
+                  "localizedName": "tomato sauce",
+                  "image": "tomato-sauce-or-pasta-sauce.jpg"
+                },
+                {
+                  "id": 10110219,
+                  "name": "meatballs",
+                  "localizedName": "meatballs",
+                  "image": "https://spoonacular.com/cdn/ingredients_100x100/meatballs.png"
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "number": 21,
+              "step": "Garnish with more chopped parsley.",
+              "ingredients": [
+                {
+                  "id": 11297,
+                  "name": "parsley",
+                  "localizedName": "parsley",
+                  "image": "parsley.jpg"
+                }
+              ],
+              "equipment": []
+            }
+          ]
+        }
+      ],
+      "language": "en",
+      "originalId": null,
+      "spoonacularScore": 30.72466468811035,
+      "spoonacularSourceUrl": "https://spoonacular.com/spanish-meatballs-in-tomato-sauce-660868"
+    }
+  ]
+}
