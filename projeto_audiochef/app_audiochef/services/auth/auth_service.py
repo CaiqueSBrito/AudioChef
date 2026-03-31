@@ -20,7 +20,7 @@ def authenticate_user(request):
 
     login(request, user)
     token, _ = Token.objects.get_or_create(user=user)
-    return token.key, None  # retorna token e nenhum erro
+    return token.key, None
 
 
 def register_user(request):

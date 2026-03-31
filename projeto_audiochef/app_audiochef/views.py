@@ -34,3 +34,7 @@ def registro(request):
 def sair(request):
     logout_user(request)
     return redirect('login')
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
