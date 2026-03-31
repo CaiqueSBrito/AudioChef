@@ -1,11 +1,11 @@
 import os
 import requests
 from dotenv import load_dotenv
-from .recipe_client import RecipeClient
+from .recipe_random_client import RecipeRandomClient
 
 load_dotenv()
 
-class SpoonacularClient(RecipeClient):
+class SpoonacularRandomClient(RecipeRandomClient):
     def get(self):
         response = requests.get(
             "https://api.spoonacular.com/recipes/random",

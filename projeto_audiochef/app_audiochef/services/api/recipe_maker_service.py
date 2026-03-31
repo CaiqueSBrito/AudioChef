@@ -1,9 +1,7 @@
-from .spoonacular_client import SpoonacularClient
+from .random.recipe_random_client import RecipeRandomClient
 
 
-def make_recipe(client=None):
-    if client is None:
-        client = SpoonacularClient()
+def make_recipe(client: RecipeRandomClient):
     recipe = client.get()
     
     result = {

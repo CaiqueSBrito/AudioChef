@@ -139,6 +139,50 @@
             cursor: wait;
         }
 
+        /* ── Search ── */
+        .search-container {
+            display: flex;
+            width: 100%;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            font-size: 1.05rem;
+            color: #fff;
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .search-input:focus {
+            border-color: #e94560;
+        }
+
+        .btn-search {
+            padding: 0.9rem 1.8rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+            box-shadow: 0 4px 20px rgba(9, 132, 227, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(9, 132, 227, 0.5);
+        }
+
         /* ── Spinner ── */
         .spinner {
             display: none;
@@ -331,6 +375,11 @@
     </header>
 
     <main class="main">
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="O que você quer cozinhar hoje?">
+            <button class="btn-search" onclick="irParaBusca()">🔍 Buscar</button>
+        </div>
+
         <button class="btn-recipe" id="btn-recipe" onclick="receberReceita()">
             🔀 Gerar Receita Aleatória
         </button>
@@ -365,6 +414,17 @@
     </main>
 
 <script>
+    function irParaBusca() {
+        const q = document.getElementById('search-input').value.trim();
+        if (q) {
+            window.location.href = `/buscar/?q=${encodeURIComponent(q)}`;
+        }
+    }
+
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') irParaBusca();
+    });
+
     async function receberReceita() {
         const btn      = document.getElementById('btn-recipe');
         const spinner  = document.getElementById('spinner');

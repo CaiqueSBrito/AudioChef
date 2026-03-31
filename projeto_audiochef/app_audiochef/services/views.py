@@ -1,18 +1,41 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .services.api import recipe_service
-from .services.auth.auth_service import authenticate_user, register_user, logout_user
+
+from ..models import Recipe
+from ..serializers import RecipeSerializer
+
+from .api import recipe_maker_service
+from .api.random.spoonacular_client import SpoonacularRandomClient
+from .api.search import search_recipes
+from .api.search.spoonacular_search_client import SpoonacularSearchClient
+from .auth.auth_service import authenticate_user, register_user, logout_user
 
 # Create your views here.
 def home(request):
     return render(request, 'app_audiochef/index.html')
 
-class RecipesAPIView(APIView):
+def search_page(request):
+    return render(request, 'app_audiochef/search.html')
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+
+class RecipeRandomAPIView(APIView):
     def get(self, request):
-        data = recipe_service.make_recipe()
+        client = SpoonacularClient()
+        data = recipe_maker_service.make_recipe(client)
+        return Response(data, status=status.HTTP_200_OK)
+
+class RecipeSearchAPIView(APIView):
+    def get(self, request):
+        query = request.query_params.get('q', '')
+        client = SpoonacularSearchClient()
+        data = search_recipes.make_list(client, query)
         return Response(data, status=status.HTTP_200_OK)
 
 def entrar(request):
@@ -34,7 +57,3 @@ def registro(request):
 def sair(request):
     logout_user(request)
     return redirect('login')
-
-class RecipeViewSet(viewsets.ModelViewSet):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
