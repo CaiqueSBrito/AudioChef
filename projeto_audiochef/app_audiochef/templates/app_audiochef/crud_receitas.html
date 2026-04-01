@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Receitas — AudioChef</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #e8e8e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ── */
+        .header {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e94560, #ff6b6b, #ffa502);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            margin-top: 0.3rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .header-nav { display: flex; gap: 0.6rem; }
+        .btn-nav {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #e8e8e8;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #cf3a52, #f55a5a);
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-danger {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            margin-left: 0.5rem;
+        }
+        
+        .btn-danger:hover {
+            background: rgba(231, 76, 60, 0.3);
+            border-color: rgba(231, 76, 60, 0.5);
+        }
+
+        /* ── Main ── */
+        .main {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .top-bar h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ── Table ── */
+        .table-container {
+            width: 100%;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        th {
+            background: rgba(255,255,255,0.02);
+            font-weight: 600;
+            color: #aaa;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            color: #e8e8e8;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: auto;
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.015);
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        /* ── Modal ── */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: #151515;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .btn-close:hover {
+            color: #fff;
+        }
+
+        /* ── Form ── */
+        .form-group {
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #e94560;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: #e94560;
+            cursor: pointer;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .helper-text {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-left" onclick="window.location.href='/'">
+            <h1>🍳 AudioChef <span style="font-size: 1.2rem; background: transparent; -webkit-text-fill-color: #888; letter-spacing: 0; font-weight: 500;">Admin CRUD</span></h1>
+        </div>
+        <nav class="header-nav">
+            <a href="/" class="btn-nav btn-nav--outline">Voltar ao Início</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="top-bar">
+            <h2>Gerenciador de Receitas do Banco</h2>
+            <button class="btn-nav btn-primary" onclick="abrirModal()">+ Nova Receita</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="80">Imagem</th>
+                        <th>ID</th>
+                        <th>Tempo (Min)</th>
+                        <th>Porções</th>
+                        <th>Status Dieta</th>
+                        <th width="200" style="text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="recipe-list">
+                    <tr><td colspan="6" style="text-align:center; color:#888;">Carregando receitas...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Form CRUD -->
+    <div class="modal" id="modal-crud">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Nova Receita</h3>
+                <button class="btn-close" onclick="fecharModal()">&times;</button>
+            </div>
+            
+            <form id="crud-form">
+                <input type="hidden" id="recipeId">
+
+                <div class="form-group">
+                    <label>URL da Imagem</label>
+                    <input type="url" class="form-control" id="f_image" placeholder="https://...">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tempo de Preparo (min)</label>
+                        <input type="number" class="form-control" id="f_readyInMinutes" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Porções</label>
+                        <input type="number" class="form-control" id="f_servings" min="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="f_vegan">
+                        <label for="f_vegan">Vegano</label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="f_vegetarian">
+                        <label for="f_vegetarian">Vegetariano</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipos de Dieta <span class="helper-text">(Separado por vírgulas)</span></label>
+                    <input type="text" class="form-control" id="f_diets" placeholder="ex: gluten free, prato principal">
+                </div>
+
+                <div class="form-group">
+                    <label>Ingredientes (Estendidos) <span class="helper-text">(Separado por vírgulas)</span></label>
+                    <textarea class="form-control" id="f_extendedIngredients" rows="2" placeholder="ex: 1 copo de leite, 2 ovos..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Modo de Preparo</label>
+                    <textarea class="form-control" id="f_instructions" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Resumo / Descrição</label>
+                    <textarea class="form-control" id="f_summary" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-nav btn-nav--outline" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-nav btn-primary">Salvar Receita no Banco</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+    // URL Base do Django Rest Framework ModelViewSet
+    const API_URL = '/api/recipes/';
+
+    // Utility forces str -> array
+    const parseToArray = (str) => {
+        if (!str) return [];
+        return str.split(',').map(item => item.trim()).filter(i => i.length > 0);
+    }
+    // Utility forces array -> str
+    const arrayToString = (arr) => {
+        if (!arr || !Array.isArray(arr)) return '';
+        return arr.join(', ');
+    }
+
+    async function carregarReceitas() {
+        try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            
+            let recipes = Array.isArray(data) ? data : (data.results || []);
+            renderTabela(recipes);
+
+        } catch(e) {
+            console.error(e);
+            document.getElementById('recipe-list').innerHTML = `
+                <tr><td colspan="6" style="text-align:center; color:#ff6b6b;">Erros ao conectar na API local.</td></tr>
+            `;
+        }
+    }
+
+    function renderTabela(recipes) {
+        const tbody = document.getElementById('recipe-list');
+        tbody.innerHTML = '';
+        if(recipes.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#888;">Banco Vazio. Adicione uma receita.</td></tr>';
+            return;
+        }
+
+        recipes.forEach(r => {
+            const imgEl = r.image ? `<img src="${r.image}" class="item-image" />` : '<div class="item-image" style="background:#333; display:flex; align-items:center; justify-content:center; font-size: 0.6rem; color:#666">Sem Img</div>';
+            
+            let dietText = '<span style="color:#aaa;">--</span>';
+            if (r.vegan) dietText = '<span style="color:#2ecc71; border:1px solid #2ecc71; padding:2px 6px; border-radius:4px; font-size:0.8rem">Vegano</span>';
+            else if (r.vegetarian) dietText = '<span style="color:#f1c40f; border:1px solid #f1c40f; padding:2px 6px; border-radius:4px; font-size:0.8rem">Vegetariano</span>';
+            else if (r.diets && r.diets.length > 0) {
+                dietText = `<span style="background:#222; padding:2px 6px; border-radius:4px; font-size:0.8rem">${r.diets[0]}</span>`;
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${imgEl}</td>
+                <td style="font-weight:600">#${r.id}</td>
+                <td>${r.readyInMinutes || '--'} min</td>
+                <td>${r.servings || '--'}</td>
+                <td>${dietText}</td>
+                <td class="actions">
+                    <button class="btn-nav btn-nav--outline" onclick="editarReceita(${r.id})">✏️ Editar</button>
+                    <button class="btn-nav btn-danger" onclick="excluirReceita(${r.id})">🗑️ Deletar</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    let isEditing = false;
+
+    function abrirModal() {
+        document.getElementById('crud-form').reset();
+        document.getElementById('recipeId').value = '';
+        document.getElementById('modal-title').textContent = 'Nova Receita';
+        isEditing = false;
+        document.getElementById('modal-crud').classList.add('active');
+    }
+
+    function fecharModal() {
+        document.getElementById('modal-crud').classList.remove('active');
+    }
+
+    document.getElementById('crud-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const rId = document.getElementById('recipeId').value;
+        const payload = {
+            image: document.getElementById('f_image').value,
+            readyInMinutes: parseInt(document.getElementById('f_readyInMinutes').value) || 0,
+            servings: parseInt(document.getElementById('f_servings').value) || 0,
+            vegan: document.getElementById('f_vegan').checked,
+            vegetarian: document.getElementById('f_vegetarian').checked,
+            diets: parseToArray(document.getElementById('f_diets').value),
+            extendedIngredients: parseToArray(document.getElementById('f_extendedIngredients').value),
+            instructions: document.getElementById('f_instructions').value,
+            summary: document.getElementById('f_summary').value,
+            dishTypes: [] 
+        };
+
+        const method = isEditing ? 'PATCH' : 'POST';
+        const url = isEditing ? `${API_URL}${rId}/` : API_URL;
+
+        // Recuperar possível CSRF do Django caso necessário, mas se estiver usando APIView puro pode não precisar (DRF session / token).
+        // DRF sem authenticator default aceita JSON no body se não for sessão logada, mas por precaução enviaremos o CSRF caso cookies estejam ativados.
+        
+        try {
+            const res = await fetch(url, {
+                method: method,
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok || res.status === 201) {
+                fecharModal();
+                carregarReceitas();
+            } else {
+                alert('Erro ao salvar no banco. O framework REST pode estar recusando (auth).');
+                console.error(await res.text());
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Erro na requisição.");
+        }
+    });
+
+    async function editarReceita(id) {
+        try {
+            const res = await fetch(`${API_URL}${id}/`);
+            if(!res.ok) throw new Error("Não encontrado");
+            const data = await res.json();
+
+            document.getElementById('recipeId').value = data.id;
+            document.getElementById('f_image').value = data.image || '';
+            document.getElementById('f_readyInMinutes').value = data.readyInMinutes || 0;
+            document.getElementById('f_servings').value = data.servings || 0;
+            document.getElementById('f_vegan').checked = data.vegan || false;
+            document.getElementById('f_vegetarian').checked = data.vegetarian || false;
+            document.getElementById('f_diets').value = arrayToString(data.diets);
+            document.getElementById('f_extendedIngredients').value = arrayToString(data.extendedIngredients);
+            document.getElementById('f_instructions').value = data.instructions || '';
+            document.getElementById('f_summary').value = data.summary || '';
+
+            document.getElementById('modal-title').textContent = 'Editar Receita #' + data.id;
+            isEditing = true;
+            document.getElementById('modal-crud').classList.add('active');
+
+        } catch(e) {
+            console.error(e);
+            alert("Erro ao buscar receita.");
+        }
+    }
+
+    async function excluirReceita(id) {
+        if(!confirm("Tem certeza que deseja deletar a receita #" + id + "?")) return;
+        
+        try {
+            const res = await fetch(`${API_URL}${id}/`, {
+                method: 'DELETE'
+            });
+            if(res.ok || res.status === 204) {
+                carregarReceitas();
+            } else {
+                alert("Erro ao deletar.");
+            }
+        } catch(e) {
+            console.error(e);
+            alert("Erro de requisição ao deletar.");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        carregarReceitas();
+    });
+
+</script>
+</body>
+</html>

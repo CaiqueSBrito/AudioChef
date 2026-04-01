@@ -439,7 +439,7 @@
         errorMsg.style.display = 'none';
 
         try {
-            const response = await fetch('api/recipes/');
+            const response = await fetch('/api/recipes/random/');
             if (!response.ok) throw new Error(`Erro ${response.status}`);
             const data = await response.json();
 

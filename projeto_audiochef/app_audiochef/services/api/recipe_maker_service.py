@@ -5,6 +5,7 @@ def make_recipe(client: RecipeRandomClient):
     recipe = client.get()
     
     result = {
+        "title": recipe.get("title"),
         "diets": recipe.get("diets"),
         "dishTypes": recipe.get("dishTypes"),
         "extendedIngredients": recipe.get("extendedIngredients"),

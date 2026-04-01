@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Receita — AudioChef</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #e8e8e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ── */
+        .header {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e94560, #ff6b6b, #ffa502);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            margin-top: 0.3rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .header-nav { display: flex; gap: 0.6rem; }
+        .btn-nav {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #e8e8e8;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        /* ── Main ── */
+        .main {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ── Loaders & Errors ── */
+        .spinner-container {
+            display: flex;
+            justify-content: center;
+            padding: 5rem 0;
+            width: 100%;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #e94560;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .error-msg {
+            display: none;
+            padding: 1.5rem;
+            background: rgba(233, 69, 96, 0.12);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 12px;
+            color: #ff6b6b;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* ── Recipe Viewer ── */
+        .recipe-wrapper {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-hero {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .recipe-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .recipe-hero:hover img {
+            transform: scale(1.02);
+        }
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,15,15,1) 0%, rgba(15,15,15,0.5) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+        }
+
+        .recipe-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        
+        .recipe-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+        .badge {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(5px);
+        }
+        .badge-vegan { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+        .badge-vegetarian { background: rgba(241, 196, 15, 0.15); color: #f1c40f; border: 1px solid rgba(241, 196, 15, 0.3); }
+        .badge-diet { background: rgba(155, 89, 182, 0.15); color: #c39bd3; border: 1px solid rgba(155, 89, 182, 0.3); }
+        .badge-dish { background: rgba(52, 152, 219, 0.15); color: #85c1e9; border: 1px solid rgba(52, 152, 219, 0.3); }
+
+        .recipe-meta {
+            display: flex;
+            gap: 2rem;
+            color: #ddd;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .meta-icon {
+            font-size: 1.3rem;
+        }
+
+        .recipe-content {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .recipe-content { grid-template-columns: 1fr; }
+            .recipe-title { font-size: 2.2rem; }
+            .recipe-hero { height: 350px; }
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* ── Ingredients Side ── */
+        .ingredients-box {
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .ingredients-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .ingredient-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            background: rgba(255,255,255,0.02);
+            padding: 1rem;
+            border-radius: 12px;
+            transition: transform 0.2s, background 0.2s;
+            line-height: 1.4;
+        }
+        .ingredient-item:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(4px);
+        }
+        .ingredient-bullet {
+            margin-top: 5px;
+            width: 8px;
+            height: 8px;
+            background: #e94560;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── Main details ── */
+        .details-col {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .summary-box {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #d1d1d1;
+            background: linear-gradient(145deg, #1e1e1e, #151515);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid #e94560;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .summary-box a {
+            color: #74b9ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .summary-box a:hover {
+            text-decoration: underline;
+        }
+
+        .instructions-box {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        .instructions-box p {
+            margin-bottom: 1rem;
+        }
+        .instructions-box ol, .instructions-box ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .instructions-box li {
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-left" onclick="window.location.href='/'">
+            <h1>🍳 AudioChef</h1>
+            <p>Descubra receitas com um clique</p>
+        </div>
+        <nav class="header-nav">
+            <!-- Will assume an URL named 'home' exists similar to search screen, using normal link -->
+            <a href="/" class="btn-nav btn-nav--outline">Início</a>
+            <!-- Link to search -->
+            <a href="/buscar/" class="btn-nav btn-nav--outline">Buscar Receitas</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="spinner-container" id="spinner-container">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="error-msg" id="error-msg"></div>
+
+        <div class="recipe-wrapper" id="recipe-wrapper">
+            
+            <div class="recipe-hero">
+                <img id="recipe-img" src="" alt="Imagem da receita">
+                <div class="hero-gradient">
+                    <div class="recipe-badges" id="recipe-badges">
+                        <!-- Badges serão renderizados via JS -->
+                    </div>
+                    <!-- Providing a default title in case the service doesn't return one -->
+                    <h2 class="recipe-title" id="recipe-title">Carregando...</h2>
+                    
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span id="recipe-time">-- min</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🍽️</span>
+                            <span id="recipe-servings">-- porções</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-content">
+                <aside class="ingredients-box">
+                    <h3 class="section-title">🥫 Ingredientes</h3>
+                    <ul class="ingredients-list" id="ingredients-list">
+                        <!-- Ingredientes serão renderizados via JS -->
+                    </ul>
+                </aside>
+
+                <div class="details-col">
+                    <div class="summary-box" id="recipe-summary">
+                        <!-- Summary renderizado via JS -->
+                    </div>
+
+                    <div class="instructions-box">
+                        <h3 class="section-title">👩‍🍳 Modo de Preparo</h3>
+                        <div id="recipe-instructions">
+                            <!-- Instruções renderizadas via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+<script>    
+    document.addEventListener("DOMContentLoaded", async () => {
+        const spinner = document.getElementById('spinner-container');
+        const wrapper = document.getElementById('recipe-wrapper');
+        const errorMsg = document.getElementById('error-msg');
+
+        const params = new URLSearchParams(window.location.search);
+        let endpoint = '/api/recipes/random/';
+        
+        // Verifica se há um recado ou um ID sendo passado para detalhe
+        if (params.has('q') || params.has('id')) {
+            const query = params.has('q') ? params.get('q') : params.get('id');
+            endpoint = `/api/recipes/detail/?q=${encodeURIComponent(query)}`;
+        }
+
+        try {
+            const response = await fetch(endpoint);
+            if (!response.ok) {
+                throw new Error("Erro de rede");
+            }
+            const data = await response.json();
+            renderRecipe(data);
+            
+            spinner.style.display = 'none';
+            wrapper.style.display = 'flex';
+        } catch (error) {
+            console.error(error);
+            spinner.style.display = 'none';
+            errorMsg.textContent = '⚠️ Houve um erro ao carregar os detalhes da receita. Tente novamente.';
+            errorMsg.style.display = 'block';
+        }
+    });
+
+    function renderRecipe(data) {
+        // Fallback para caso os dados venham como array (aleatório pode voltar 1 item só)
+        const recipe = (Array.isArray(data) && data.length > 0) ? data[0] : (data.results ? data.results[0] : data);
+        
+        // 1. Title
+        const titleEl = document.getElementById('recipe-title');
+        titleEl.textContent = recipe.title || "Receita Sugerida";
+
+        // 2. Image
+        const imgEl = document.getElementById('recipe-img');
+        imgEl.src = recipe.image || 'https://images.unsplash.com/photo-1498837167922-41c46b3f6160?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+
+        // 3. Badges
+        const badgesContainer = document.getElementById('recipe-badges');
+        badgesContainer.innerHTML = '';
+        
+        // Badges: Vegan, Vegetariano e outras dietas
+        const renderedDiets = new Set();
+        const addBadge = (text, className) => {
+            if (!renderedDiets.has(text.toLowerCase())) {
+                badgesContainer.innerHTML += `<span class="badge ${className}">${text}</span>`;
+                renderedDiets.add(text.toLowerCase());
+            }
+        };
+
+        if (recipe.vegan) addBadge('Vegan', 'badge-vegan');
+        if (recipe.vegetarian && !recipe.vegan) addBadge('Vegetariano', 'badge-vegetarian');
+        
+        if (recipe.diets && Array.isArray(recipe.diets)) {
+            recipe.diets.forEach(d => {
+                if (d.toLowerCase() !== 'vegan' && d.toLowerCase() !== 'vegetarian') {
+                    addBadge(d, 'badge-diet');
+                }
+            });
+        }
+        if (recipe.dishTypes && Array.isArray(recipe.dishTypes)) {
+            recipe.dishTypes.slice(0, 3).forEach(dt => {
+                addBadge(dt, 'badge-dish');
+            });
+        }
+
+        // 4. Meta Time & Servings
+        document.getElementById('recipe-time').textContent = recipe.readyInMinutes ? `${recipe.readyInMinutes} min` : '-- min';
+        document.getElementById('recipe-servings').textContent = recipe.servings ? `${recipe.servings} porções` : '-- porções';
+
+        // 5. Ingredients
+        const ingList = document.getElementById('ingredients-list');
+        ingList.innerHTML = '';
+        if (recipe.extendedIngredients && Array.isArray(recipe.extendedIngredients)) {
+            recipe.extendedIngredients.forEach(ing => {
+                const txt = typeof ing === 'string' ? ing : (ing.original || ing.name || 'Ingrediente');
+                ingList.innerHTML += `
+                    <li class="ingredient-item">
+                        <div class="ingredient-bullet"></div>
+                        <span>${txt}</span>
+                    </li>
+                `;
+            });
+        } else {
+            ingList.innerHTML = `<li class="ingredient-item" style="color:#aaa;">Ingredientes não informados</li>`;
+        }
+
+        // 6. Summary
+        const summaryBox = document.getElementById('recipe-summary');
+        summaryBox.innerHTML = recipe.summary || "Nenhuma descrição disponível para esta receita.";
+
+        // 7. Instructions
+        const instructionsBox = document.getElementById('recipe-instructions');
+        if (recipe.instructions) {
+            instructionsBox.innerHTML = recipe.instructions; 
+        } else {
+            instructionsBox.innerHTML = "<p style='color:#aaa;'>Instruções não informadas.</p>";
+        }
+    }
+</script>
+</body>
+</html>
